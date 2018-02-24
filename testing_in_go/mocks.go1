@@ -1,0 +1,77 @@
+// MOCK OMIT
+package app
+
+import (
+	"testing"
+	"github.com/stretchr/testify/mock"
+)
+
+type MyMockedObject struct{ mock.Mock } // HLM
+
+func (m *MyMockedObject) DoSomething(number int) (bool, error) { // HLM
+	args := m.Called(number)           // HLM
+	return args.Bool(0), args.Error(1) // HLM
+} // HLM
+
+func TestSomething(t *testing.T) {
+	testObj := new(MyMockedObject)
+	
+	testObj.On("DoSomething", 123).Return(true, nil) 
+	
+	targetFuncThatDoesSomethingWithObj(testObj)
+	
+	testObj.AssertExpectations(t) 
+}
+
+// END OMIT
+
+// MINICMD OMIT
+$ minimock -i github.com/gojuno/minimock/tests.Formatter -o ./tests/
+// END OMIT
+
+// MINI OMIT
+//FormatterMock implements github.com/gojuno/minimock/tests.Formatter
+type FormatterMock struct {
+	t minimock.Tester
+
+	FormatFunc    func(p string, p1 ...interface{}) (r string) // HLF
+	FormatCounter uint64
+	FormatMock    mFormatterMockFormat // HLF2
+}
+// END OMIT
+
+// MINIUSE OMIT
+formatterMock := NewFormatterMock(mc)
+formatterMock.FormatFunc = func(string, ...interface{}) string { // HLF
+  return "minimock"
+}
+// END OMIT
+// MINIUSE2 OMIT
+formatterMock := NewFormatterMock(mc)
+formatterMock.FormatMock.Expect("%s %d", "string", 1).Return("minimock") // HLF2
+// END OMIT
+
+// SQL OMIT
+func TestShouldUpdateStats(t *testing.T) {
+	db, mock, err := sqlmock.New() // HLS
+	if err != nil {
+		t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
+	}
+	defer db.Close()
+
+	mock.ExpectBegin()
+	mock.ExpectExec("UPDATE products").WillReturnResult(sqlmock.NewResult(1, 1))
+	mock.ExpectExec("INSERT INTO product_viewers").WithArgs(2, 3).WillReturnResult(sqlmock.NewResult(1, 1))
+	mock.ExpectCommit()
+
+	// now we execute our method
+	if err = recordStats(db, 2, 3); err != nil {
+		t.Errorf("error was not expected while updating stats: %s", err)
+	}
+
+	// we make sure that all expectations were met
+	if err := mock.ExpectationsWereMet(); err != nil {
+		t.Errorf("there were unfulfilled expectations: %s", err)
+	}
+}
+// END OMIT

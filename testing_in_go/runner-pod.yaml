@@ -1,0 +1,37 @@
+// HELM OMIT
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Release.Name }}-runner
+  labels:
+    service: {{ .Release.Name }}-runner
+    app: test-runner
+    purpose: test
+spec:
+  restartPolicy: Never
+  containers:
+    - name: service-test
+      imagePullPolicy: IfNotPresent
+      image: {{ .Values.global.imageRegistry }}/service/{{ .Chart.Name }}:{{ .Values.imageTag }}
+      ports:
+        - containerPort: 8090
+      env:
+        - name: SERVICE_ADDRESS
+          value: {{ .Release.Name }}:8890
+        - name: MONGO_CONNECTION
+          value: {{ .Release.Name }}-mongo:27017
+      command: ["go", "test", "-tags=integration"] // HLCMD
+// END OMIT
+
+// TREE OMIT
+├── helm
+│   ├── templates
+│   │   ├── tests // HLT
+│   │   │   └── runner-pod.yaml // HLT
+│   │   ├── configmap.yaml
+│   │   └── deployment.yaml
+│   ├── values.test.yaml
+│   ├── values.yaml
+│   └── Chart.yaml
+└── .
+// END OMIT
