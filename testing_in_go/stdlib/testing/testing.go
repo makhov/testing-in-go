@@ -463,32 +463,16 @@ func (c *common) Failed() bool {
 // test or benchmark function, not from other goroutines
 // created during the test. Calling FailNow does not stop
 // those other goroutines.
+// TFAILNOW OMIT
 func (c *common) FailNow() {
 	c.Fail()
 
-	// Calling runtime.Goexit will exit the goroutine, which
-	// will run the deferred functions in this goroutine,
-	// which will eventually run the deferred lines in tRunner,
-	// which will signal to the test loop that this test is done.
-	//
-	// A previous version of this code said:
-	//
-	//	c.duration = ...
-	//	c.signal <- c.self
-	//	runtime.Goexit()
-	//
-	// This previous version duplicated code (those lines are in
-	// tRunner no matter what), but worse the goroutine teardown
-	// implicit in runtime.Goexit was not guaranteed to complete
-	// before the test exited. If a test deferred an important cleanup
-	// function (like removing temporary files), there was no guarantee
-	// it would run on a test failure. Because we send on c.signal during
-	// a top-of-stack deferred function now, we know that the send
-	// only happens after any other stacked defers have completed.
+	// …
 	c.finished = true
-	runtime.Goexit()
+	runtime.Goexit() // HLEXIT
 }
 
+// END OMIT
 // log generates the output. It's always at the same stack depth.
 func (c *common) log(s string) {
 	c.mu.Lock()

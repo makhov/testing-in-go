@@ -1,5 +1,5 @@
 Тестирование в Go
-Go 1.10 Release Party
+GoWay Meetup v1.3
 
 Алексей Махов
 Avito
@@ -86,6 +86,15 @@ amakhov@avito.ru
 
 * Табличные тесты ✅
 .code testing_in_go/foo_test.go /TABLERIGHTWAYTESTWITHPARALLEL OMIT/,/END OMIT/ HLP
+
+* t.Parallel() + t.FailNow() ⚠️
+.code testing_in_go/stdlib/testing/testing.go /TFAILNOW OMIT/,/END OMIT/ HLEXIT
+
+* t.Parallel() + t.FailNow() ⚠️
+.code testing_in_go/cmd.go /PARALLELFATAL OMIT/,/END OMIT/ 
+
+* t.Parallel() + t.FailNow() ⚠️
+.code testing_in_go/foo_test.go /ASCODE OMIT/,/END OMIT/ HLERR
 
 * testing/*
 - testing/iotest
@@ -240,6 +249,9 @@ doc.go
 .code testing_in_go/testify.go /REQUIRE OMIT/,/END OMIT/
 : FailNow
 
+* t.Parallel() + t.FailNow() ✅
+.code testing_in_go/foo_test.go /ASCODETESTIFY OMIT/,/END OMIT/ HLERR
+
 * no testify/assert
 .code testing_in_go/testify.go /AST OMIT/,/END OMIT/
 
@@ -265,10 +277,10 @@ doc.go
 .code testing_in_go/mocks.go1 /MINI OMIT/,/END OMIT/ HLF2
 .code testing_in_go/mocks.go1 /MINIUSE2 OMIT/,/END OMIT/ HLF2
 
-* go-sqlmock
+* go-sqlmock ⚠️
 .link https://github.com/DATA-DOG/go-sqlmock/ github.com/DATA-DOG/go-sqlmock
 
-* go-sqlmock
+* go-sqlmock ⚠️
 .code testing_in_go/mocks.go1 /SQL OMIT/,/END OMIT/ HLS
 
 * Заключение

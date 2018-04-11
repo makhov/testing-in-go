@@ -133,3 +133,42 @@ func TestTime(t *testing.T) {
     --- PASS: TestTime/#01 (0.00s)
     --- PASS: TestTime/#02 (0.00s)
 // END OMIT
+
+// ASCODE OMIT
+func TestAnything(t *testing.T) { 
+	…
+	for name, tc := range testCases {
+		t.Run("", func(t *testing.T) { 
+			t.Parallel() 
+			loc, err := time.LoadLocation(tc.loc)
+			if err != nil { // HLERR
+				t.Error("could not load location")
+			} else { // HLERR
+				gmt, _ := time.Parse("15:04", tc.gmt)
+				if got := gmt.In(loc).Format("15:04"); got != tc.want {
+					t.Errorf("got %s; want %s", got, tc.want)
+				}
+			} 
+		})
+	}
+} 
+// END OMIT
+
+
+// ASCODETESTIFY OMIT
+func TestAnything(t *testing.T) { 
+	…
+	for name, tc := range testCases {
+		t.Run("", func(t *testing.T) { 
+			t.Parallel() 
+			loc, err := time.LoadLocation(tc.loc)
+			if assert.NoError(t, err) { // HLERR
+				gmt, _ := time.Parse("15:04", tc.gmt)
+				if got := gmt.In(loc).Format("15:04"); got != tc.want {
+					t.Errorf("got %s; want %s", got, tc.want)
+				}
+			} 
+		})
+	}
+} 
+// END OMIT

@@ -85,3 +85,14 @@ if testing.Short() {
 	t.Skip(…)
 }
 // END OMIT
+
+// PARALLELFATAL OMIT
+--- FAIL: TestExample (0.00s)
+panic: test executed panic(nil) or runtime.Goexit
+
+goroutine 6 [running]:
+testing.func·006()
+    /usr/local/go/src/testing/testing.go:441 +0x181
+runtime.Goexit()
+…
+// END OMIT
