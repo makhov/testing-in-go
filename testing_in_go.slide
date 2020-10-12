@@ -4,7 +4,7 @@ GoWay Meetup v1.3
 Алексей Махов
 Avito
 @makhov
-amakhov@avito.ru
+makhov.alex@gmail.com
 : 3 оф языка, как в Исландии: исландский, англ и язык жестов. Ну да, мы еще пишем на PHP.
 : Ок-ок, это шутка – англ не является оф языком в Исландии
 
@@ -91,7 +91,7 @@ amakhov@avito.ru
 .code testing_in_go/stdlib/testing/testing.go /TFAILNOW OMIT/,/END OMIT/ HLEXIT
 
 * t.Parallel() + t.FailNow() ⚠️
-.code testing_in_go/cmd.go /PARALLELFATAL OMIT/,/END OMIT/ 
+.code testing_in_go/cmd.go /PARALLELFATAL OMIT/,/END OMIT/
 
 * t.Parallel() + t.FailNow() ⚠️
 .code testing_in_go/foo_test.go /ASCODE OMIT/,/END OMIT/ HLERR
@@ -124,7 +124,7 @@ amakhov@avito.ru
 
 * go test
 
-* go test 
+* go test
 .code testing_in_go/cmd.go /GOOKTEST OMIT/,/END OMIT/
 
 * go test -v
@@ -172,42 +172,42 @@ amakhov@avito.ru
 .code testing_in_go/fixture.go /GOLDEN OMIT/,/END OMIT/ HLUP
 
 * Golden files ✅
-.code testing_in_go/fixture.go /GOLDENRES OMIT/,/END OMIT/ 
+.code testing_in_go/fixture.go /GOLDENRES OMIT/,/END OMIT/
 
 * test helpers ✅
-.code testing_in_go/helpers.go /HELPER OMIT/,/END OMIT/ 
+.code testing_in_go/helpers.go /HELPER OMIT/,/END OMIT/
 
 * test helpers ✅
-.code testing_in_go/helpers.go /SETUP OMIT/,/END OMIT/ 
+.code testing_in_go/helpers.go /SETUP OMIT/,/END OMIT/
 
 * test helpers ❌
 .code testing_in_go/helpers.go /WRONG OMIT/,/END OMIT/ HLF
 
 * test helpers ❌
-.code testing_in_go/helpers.go /WRONG OMIT/,/END OMIT/ 
+.code testing_in_go/helpers.go /WRONG OMIT/,/END OMIT/
 .code testing_in_go/helpers.go /WRONGRES OMIT/,/END OMIT/ HLF
 
 * testing.go ⚠️
 - Переиспользование в других пакетах
 - Это НЕ тестовый код
 
-* black box 
+* black box
 - package foo_test
 : циклические зависимости
 
 * build tags ✅
-.code testing_in_go/integration.go /FLAG OMIT/,/ENDFLAG OMIT/ 
+.code testing_in_go/integration.go /FLAG OMIT/,/ENDFLAG OMIT/
 
 * build tags ✅
-.code testing_in_go/integration.go /FLAGRUN OMIT/,/END OMIT/ 
+.code testing_in_go/integration.go /FLAGRUN OMIT/,/END OMIT/
 
 * build tags ✅
 - *_integration_test.go
 - package integration_test
- 
+
 * build tags ✅
 doc.go
-.code testing_in_go/integration.go /DOC OMIT/,/END OMIT/ 
+.code testing_in_go/integration.go /DOC OMIT/,/END OMIT/
 
 * build tags ✅
 .code testing_in_go/runner-pod.yaml /TREE OMIT/,/END OMIT/ HLT
@@ -240,12 +240,12 @@ doc.go
 .code testing_in_go/cmd.go /JUNIT OMIT/,/END OMIT/
 
 * testify/assert
-.link https://github.com/stretchr/testify/ github.com/stretchr/testify/assert 
+.link https://github.com/stretchr/testify/ github.com/stretchr/testify/assert
 .code testing_in_go/testify.go /ASSERT OMIT/,/END OMIT/
 : Fail
 
 * testify/require
-.link https://github.com/stretchr/testify/ github.com/stretchr/testify/require 
+.link https://github.com/stretchr/testify/ github.com/stretchr/testify/require
 .code testing_in_go/testify.go /REQUIRE OMIT/,/END OMIT/
 : FailNow
 
@@ -258,7 +258,7 @@ doc.go
 * Mocks
 
 * testify/mock
-.link https://github.com/stretchr/testify/ github.com/stretchr/testify/mock 
+.link https://github.com/stretchr/testify/ github.com/stretchr/testify/mock
 
 * testify/mock
 .code testing_in_go/mocks.go1 /MOCK OMIT/,/END OMIT/ HLM
@@ -284,5 +284,5 @@ doc.go
 .code testing_in_go/mocks.go1 /SQL OMIT/,/END OMIT/ HLS
 
 * Заключение
-: Я не сторонник TDD, но тесты позволяют писать мне код быстрее, потому что для проверки того, что я тут понаписал, я не запускаю все приложение, не прощелкиваю 5 экранов и не отправляю столько же запросов курлом, я просто пишу тест, в котором проверяю поведение функции в разных условиях, в том числе, те случаи, когда на том конце провода кто-то умер поэтому у меня, например, немало тестов на приватные методы, хотя мы часто слышим, что это моветон. Блин, ну вот у меня публичный метод, внутри 3 приватных со сложной логикой и большим кол-вом вариантов. Ну я лучше 3 теста напишу на приватные и один-два на публичный, но не погребу себя под тонной моков и различных инвариантов входящих данных. 
-: Тесты – ефрейтор в вашем взводе: тот парень, что прикроет спину, когда вы катите в бой и будет подносить снаряды, когда вы делаете новую фичу 
+: Я не сторонник TDD, но тесты позволяют писать мне код быстрее, потому что для проверки того, что я тут понаписал, я не запускаю все приложение, не прощелкиваю 5 экранов и не отправляю столько же запросов курлом, я просто пишу тест, в котором проверяю поведение функции в разных условиях, в том числе, те случаи, когда на том конце провода кто-то умер поэтому у меня, например, немало тестов на приватные методы, хотя мы часто слышим, что это моветон. Блин, ну вот у меня публичный метод, внутри 3 приватных со сложной логикой и большим кол-вом вариантов. Ну я лучше 3 теста напишу на приватные и один-два на публичный, но не погребу себя под тонной моков и различных инвариантов входящих данных.
+: Тесты – ефрейтор в вашем взводе: тот парень, что прикроет спину, когда вы катите в бой и будет подносить снаряды, когда вы делаете новую фичу
